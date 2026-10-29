@@ -22,6 +22,10 @@ create table if not exists public.items (
 create index if not exists items_ts_desc_idx on public.items (ts desc);
 alter table public.items enable row level security;
 
+-- Data API grants: RLS policies below still decide which rows/actions are allowed.
+grant select on public.items to anon;
+grant select, insert, update, delete on public.items to authenticated;
+
 drop policy if exists "Public can read items" on public.items;
 create policy "Public can read items" on public.items for select to anon, authenticated using (true);
 
