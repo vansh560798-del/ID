@@ -3,7 +3,7 @@
  * Enables PWA installation, offline shell caching, and offline PDF viewing.
  */
 
-const STATIC_CACHE = 'st-arnolds-shell-v1';
+const STATIC_CACHE = 'st-arnolds-shell-v2';
 const PDF_CACHE = 'st-arnolds-pdfs-v1';
 
 const PRECACHE_ASSETS = [
@@ -15,6 +15,7 @@ const PRECACHE_ASSETS = [
   'https://cdn.jsdelivr.net/npm/fuse.js@7.0.0',
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js',
+  'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2',
   'https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js',
   'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js'
 ];
