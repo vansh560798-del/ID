@@ -1,14 +1,14 @@
 /**
  * Cloudflare Worker for St. Arnold's ID Portal
- * Commits uploaded PDF files directly to GitHub repository: riishilmmehta/id
+ * Commits uploaded PDF files to the GitHub repository configured through Worker environment variables
  * File destination: /uploads/{class}/{timestamp}_{filename}
  * 
  * Required Cloudflare Worker Secret:
  * - GITHUB_TOKEN: Personal Access Token (classic: `repo` scope OR fine-grained: Read and Write access to Contents)
  * 
  * Configurable Environment Variables (optional, defaults provided):
- * - REPO_OWNER: "riishilmmehta"
- * - REPO_NAME: "id"
+ * - REPO_OWNER: "your GitHub username"
+ * - REPO_NAME: "your repository name"
  * - REPO_BRANCH: "main"
  */
 
@@ -56,8 +56,11 @@ export default {
           });
         }
 
-        const owner = env.REPO_OWNER || 'riishilmmehta';
-        const repo = env.REPO_NAME || 'id';
+        const owner = env.REPO_OWNER;
+        const repo = env.REPO_NAME;
+        if (!owner || !repo) {
+          return new Response(JSON.stringify({ error: 'Set REPO_OWNER and REPO_NAME Worker variables before enabling PDF uploads.' }), { status: 500, headers: corsHeaders() });
+        }
         const branch = env.REPO_BRANCH || 'main';
         const token = env.GITHUB_TOKEN;
 
